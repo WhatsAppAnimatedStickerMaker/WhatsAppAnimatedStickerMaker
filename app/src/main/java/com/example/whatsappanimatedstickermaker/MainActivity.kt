@@ -7,7 +7,6 @@ import android.content.Intent
 import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -15,24 +14,31 @@ import android.util.Log
 import android.widget.Button
 import android.widget.VideoView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import java.io.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private var btn: Button? = null
+    private var btn2 : Button? = null
     private var videoView: VideoView? = null
     private val VIDEO_DIRECTORY = "/demonuts"
-    private val GALLERY:Int = 1
-    private  var CAMERA:Int = 2
+    private val GALLERY: Int = 1
+    private var CAMERA: Int = 2
+    private var pathsent:String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         btn = findViewById(R.id.selbutton) as Button
+        btn2 = findViewById(R.id.edit) as Button
         videoView = findViewById(R.id.vv) as VideoView
 
         btn!!.setOnClickListener { showPictureDialog() }
+        btn2!!.setOnClickListener { gotoEditActivity() }
 
 
 
@@ -70,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
         startActivityForResult(intent, CAMERA)
     }
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         Log.d("result", "" + resultCode)
@@ -88,6 +95,9 @@ class MainActivity : AppCompatActivity() {
                 videoView?.setVideoURI(contentURI)
                 videoView?.requestFocus()
                 videoView?.start()
+                pathsent = selectedVideoPath.toString()
+
+
             }
         } else if (requestCode == CAMERA) {
             val contentURI = data!!.data
@@ -97,8 +107,25 @@ class MainActivity : AppCompatActivity() {
             videoView?.setVideoURI(contentURI)
             videoView?.requestFocus()
             videoView?.start()
+            pathsent = recordedVideoPath.toString()
+
         }
+
+
     }
+
+    private fun gotoEditActivity() {
+
+         val i = Intent(this@MainActivity, TrimActivity::class.java)
+            i.putExtra("uri", pathsent.toString())
+            startActivity(i)
+
+
+    }
+
+
+
+
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun saveVideoToInternalStorage(filePath: String) {
@@ -149,5 +176,6 @@ class MainActivity : AppCompatActivity() {
         } else
             null
     }
+
 
 }
