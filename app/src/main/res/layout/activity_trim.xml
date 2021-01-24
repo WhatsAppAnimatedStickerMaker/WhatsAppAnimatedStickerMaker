@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrimActivity">
+
+    <VideoView
+        android:id="@+id/vv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_above="@id/layout2"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pause"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_pause"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_90sdp"
+        android:id="@+id/layout2"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent"
+        >
+        <org.florescu.android.rangeseekbar.RangeSeekBar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/seekbar"
+            android:layout_marginRight="17dp"
+            rsb_indicator_text_color = "#fff"
+            rsb_progress_color = "@color/colorPrimaryDark"
+            rsb_progress_default_color = "@color/colorPrimaryDark"
+            android:layout_marginLeft="17dp"
+            rsb_tick_mark_text_color = "@color/colorPrimaryDark"
+            android:layout_centerInParent="true"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvvLeft"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:text="@string/_00_00_00"
+            android:layout_below="@+id/seekbar"
+            />
+
+        <TextView
+            android:id="@+id/tvvRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/seekbar"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="end"
+            android:text="00:00:00"
+            android:textSize="17sp" />
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
