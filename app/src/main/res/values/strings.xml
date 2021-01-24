@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WhatsAppAnimatedStickerMaker</string>
+    <string name="_00_00_00">00:00:00</string>
+    <string name="trim">TRIM</string>
 </resources>
